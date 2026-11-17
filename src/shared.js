@@ -34,7 +34,7 @@
     readPauseMin: 1, readPauseMax: 2
   };
 
-  /* 平台元数据：host 用于 host_permissions 与标签页识别，searchUrl 均为实测过的搜索入口。
+  /* 平台元数据：host 用于 host_permissions 与标签页识别，searchUrl 为当前适配的搜索入口；平台改版后可能需要维护。
      mode = list  : 列表页内点卡片出详情，投递动作可在当前页完成
      mode = detail: 需要导航到岗位详情页后再投递，由总控台逐卡片调度 */
   const META = {

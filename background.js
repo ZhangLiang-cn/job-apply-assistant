@@ -1,9 +1,10 @@
 /* 极简 Service Worker：只负责初始化存储。
    长任务调度全部放在常驻的 console.html 页面里，避免 SW 被浏览器回收导致任务中断。 */
-chrome.runtime.onInstalled.addListener(() => {
+chrome.runtime.onInstalled.addListener(details => {
   chrome.storage.local.get(["cfg", "logs", "seen", "state"], d => {
     const patch = {};
     if (!d.cfg) patch.cfg = null;            // 由 popup / console 首次加载时套用默认值
+    else if (d.cfg.dryRun === false) patch.cfg = Object.assign({}, d.cfg, { dryRun: true }); // 升级后强制先进入演练模式
     if (!Array.isArray(d.logs)) patch.logs = [];
     if (!Array.isArray(d.seen)) patch.seen = [];
     if (!d.state) patch.state = { running: false, paused: false, stopReason: "" };
