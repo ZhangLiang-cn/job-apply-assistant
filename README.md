@@ -2,11 +2,24 @@
 
 **AIBOT 研发与探索制作的浏览器扩展，支持 BOSS直聘、智联招聘、猎聘、前程无忧 51Job、鱼泡直聘。** 将多平台岗位扫描、条件筛选、页面操作、任务控制和执行台账集中到一个控制台。
 
-- 项目介绍页：https://zhangliang-cn.github.io/job-apply-assistant/
+- 项目介绍页（启用 GitHub Pages 后访问）：https://zhangliang-cn.github.io/job-apply-assistant/
 - GitHub 源码：https://github.com/ZhangLiang-cn/job-apply-assistant
 - 完整 ZIP：https://github.com/ZhangLiang-cn/job-apply-assistant/archive/refs/heads/main.zip
 
 > **重要：** 演练模式不点击最终投递按钮；实投模式会触发招聘网站原生沟通或投递流程，可能向 HR 发送简历、招呼语并形成无法撤回的记录。使用前请本人确认运行模式、岗位和简历内容。
+
+## 发布项目介绍页（首次设置一次）
+
+仓库源码和介绍页已经提交到 main 分支。若项目介绍页暂时显示 404，需要在 GitHub 仓库中启用 Pages：
+
+1. 打开仓库 Settings。
+2. 进入 Pages。
+3. 在 Build and deployment 中选择 Deploy from a branch。
+4. Branch 选择 main，目录选择 /(root)。
+5. 点击 Save，等待 GitHub Pages 完成首次部署。
+6. 部署完成后访问 https://zhangliang-cn.github.io/job-apply-assistant/。
+
+介绍页使用仓库根目录的 index.html，截图文件位于 assets/ 目录。
 
 ## 支持平台
 
