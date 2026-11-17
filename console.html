@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8">
+  <link rel="stylesheet" href="src/ui.css">
+  <link rel="stylesheet" href="console.css">
+  <title>岗位自动投递助手 · 控制台</title>
+</head>
+<body>
+  <div class="hero">
+    <h1>投递控制台 <span id="modeBadge" class="badge badge-dry">演练模式</span></h1>
+    <p>iOS 10 简洁界面 · 单平台执行 · 关键词屏蔽 · 薪资口径 · 风控硬停止 ｜ 运行期间请保持本标签页打开</p>
+  </div>
+
+  <div class="bar">
+    <span class="scope-label">本次执行</span>
+    <select id="scope" class="scope-sel" title="选择单一平台后，其他平台不会进入执行计划">
+      <option value="all">全部（按配置勾选）</option>
+      <option value="boss">仅 BOSS直聘</option>
+      <option value="zhilian">仅 智联招聘</option>
+      <option value="liepin">仅 猎聘</option>
+      <option value="job51">仅 前程无忧51Job</option>
+      <option value="yupao">仅 鱼泡直聘</option>
+    </select>
+    <button id="start" class="btn-primary">▶ 开始</button>
+    <button id="pause" class="btn-plain" disabled>⏸ 暂停</button>
+    <button id="stop" class="btn-danger" disabled>⏹ 停止</button>
+    <button id="export" class="btn-ghost">导出台账 CSV</button>
+    <button id="clear" class="btn-plain">清空台账</button>
+    <button id="reloadCfg" class="btn-plain">重载配置</button>
+    <span id="runState" class="state">待机</span>
+  </div>
+
+  <div id="riskBanner" class="risk" style="display:none">
+    <b>⛔ 任务已自动停止</b>：检测到平台风控 / 额度提示。插件不会再执行任何点击，也不会尝试绕过。请本人手动完成验证、等待额度恢复后重新运行。
+    <div id="riskText" class="risk-text"></div>
+  </div>
+
+  <div class="wrap">
+    <div class="panel">
+      <h2>平台进度</h2>
+      <div id="cards" class="cards"></div>
+    </div>
+
+    <div class="panel">
+      <h2>当前动作</h2>
+      <div id="current" class="current">尚未开始</div>
+      <div class="mini" id="note"></div>
+    </div>
+
+    <div class="panel">
+      <h2>实时台账 <span id="logCount" class="mini"></span></h2>
+      <div class="logbox">
+        <table>
+          <thead><tr><th>时间</th><th>平台</th><th>岗位</th><th>薪资</th><th>状态</th><th>成功</th></tr></thead>
+          <tbody id="logBody"><tr><td colspan="6" class="empty">暂无记录</td></tr></tbody>
+        </table>
+      </div>
+    </div>
+
+    <div class="tips">
+      <b>运行说明</b>：控制台是调度中心，会新开一个工作标签页依次加载搜索页；页面侧脚本对真实网页做 DOM 点击，不调用平台接口。
+      <b>单平台执行</b>：顶部「本次执行」选择某一平台后，只有该平台会进入计划，其他平台一步都不会跑；上限沿用配置面板里的每家上限。选「全部」时才按配置面板的平台勾选执行。
+      <b>默认演练</b>，只产出「预计投递清单」，不点击最终投递按钮；只有在配置面板主动关闭「演练模式」后，点击「开始」才会弹出实投二次确认。
+      命中验证码、滑块、账号异常、日额度提示会立即整任务停止；连续失败达阈值也会停止。<br>
+      <b>界面</b>：iOS 10 扁平风格，已移除毛玻璃、光晕与跟随动画等特效，降低渲染开销。
+    </div>
+  </div>
+
+  <script src="src/shared.js"></script>
+  <script src="console.js"></script>
+</body>
+</html>

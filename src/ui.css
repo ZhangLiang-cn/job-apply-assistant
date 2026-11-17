@@ -1,0 +1,133 @@
+/* iOS 10 风格：扁平、分组列表、系统蓝、白底细边框。
+   刻意去掉液态玻璃、backdrop-filter、光晕、跟随鼠标高光和位移动画，
+   解决扩展页渲染卡顿。保留原有 class 名，兼容 console.html / popup.html。 */
+:root {
+  --blue: #007AFF;
+  --green: #4CD964;
+  --red: #FF3B30;
+  --orange: #FF9500;
+  --ink: #1C1C1E;
+  --muted: #6D6D72;
+  --bg: #EFEFF4;
+  --line: #D8D8DC;
+  --cell-line: #ECECF0;
+  --r-lg: 10px;
+  --r-md: 10px;
+  --r-sm: 8px;
+  --r-pill: 6px;
+  --purple: #007AFF;
+  color-scheme: light;
+}
+* { box-sizing: border-box; }
+html { background: var(--bg); }
+html, body { margin: 0; padding: 0; min-height: 100%; }
+body {
+  font: 13px/1.5 -apple-system, BlinkMacSystemFont, "SF Pro Text", "PingFang SC", "Microsoft YaHei", sans-serif;
+  color: var(--ink);
+  background: var(--bg);
+  -webkit-font-smoothing: antialiased;
+  letter-spacing: 0;
+  font-variant-numeric: tabular-nums;
+}
+
+/* 通用容器：白底 + 细边框 + 小圆角，无阴影无毛玻璃 */
+.glass, .section, .panel, .pcard, .bar, .risk, .hero, button, .stat-line,
+input[type=number], input[type=text], textarea, select {
+  background: #fff;
+  border: 1px solid var(--line);
+  border-radius: var(--r-md);
+  box-shadow: none;
+  -webkit-backdrop-filter: none;
+  backdrop-filter: none;
+  transition: none;
+}
+
+/* ---------- 顶部标题区（iOS 10 分组表头） ---------- */
+.hero { margin: 12px 12px 0; padding: 13px 16px; }
+.hero h1 { margin: 0; font-size: 18px; font-weight: 600; color: var(--ink); }
+.hero p { margin: 4px 0 0; font-size: 11.5px; color: var(--muted); }
+.badge {
+  display: inline-block; padding: 2px 8px; border-radius: 4px;
+  font-size: 11px; font-weight: 600; vertical-align: middle;
+  -webkit-backdrop-filter: none; backdrop-filter: none;
+}
+.badge-live { background: var(--blue); color: #fff; border-color: var(--blue); }
+.badge-dry { background: #E5E5EA; color: var(--muted); border-color: #D8D8DC; }
+
+/* ---------- 分区 ---------- */
+.section { margin: 10px 12px; padding: 12px 14px; }
+.section h2 {
+  margin: 0 0 8px; font-size: 12px; font-weight: 600; color: var(--muted);
+  text-transform: none; letter-spacing: 0;
+}
+.row { display: flex; align-items: center; gap: 9px; margin: 7px 0; flex-wrap: wrap; }
+.row > label { min-width: 74px; color: var(--muted); font-size: 12px; }
+
+/* ---------- 输入控件 ---------- */
+input[type=number], input[type=text], textarea, select {
+  padding: 6px 9px; font: inherit; color: var(--ink);
+  outline: none; border-radius: var(--r-sm);
+}
+input[type=number] { width: 68px; }
+input[type=text] { flex: 1; min-width: 90px; }
+textarea { width: 100%; resize: vertical; line-height: 1.5; }
+textarea:focus, input[type=text]:focus, input[type=number]:focus, select:focus {
+  border-color: var(--blue);
+  box-shadow: none;
+}
+.hint { color: var(--muted); font-size: 11px; margin: 5px 0 0; }
+
+/* ---------- iOS 10 开关（扁平绿色） ---------- */
+input[type=checkbox] {
+  -webkit-appearance: none; appearance: none;
+  width: 42px; height: 25px; flex: 0 0 auto;
+  border-radius: 13px;
+  background: #D8D8DC;
+  border: none;
+  position: relative; cursor: pointer; margin: 0;
+  transition: none;
+}
+input[type=checkbox]::after {
+  content: ""; position: absolute; top: 2px; left: 2px;
+  width: 21px; height: 21px; border-radius: 50%; background: #fff;
+  box-shadow: 0 1px 2px rgba(0,0,0,.22);
+  transition: none;
+}
+input[type=checkbox]:checked { background: var(--green); }
+input[type=checkbox]:checked::after { transform: translateX(17px); }
+.chk { display: inline-flex; align-items: center; gap: 8px; font-size: 12px; cursor: pointer; }
+.switch { display: flex; align-items: flex-start; gap: 11px; }
+.switch label { cursor: pointer; flex: 1; }
+
+/* ---------- 滑块保留基础样式（旧配置页可能仍残留） ---------- */
+input[type=range] {
+  -webkit-appearance: none; appearance: none;
+  width: 100%; height: 5px; border-radius: 3px; margin: 8px 0 2px;
+  background: #D8D8DC; outline: none; cursor: pointer;
+}
+input[type=range]::-webkit-slider-thumb {
+  -webkit-appearance: none; appearance: none;
+  width: 20px; height: 20px; border-radius: 50%; background: #fff;
+  border: 1px solid var(--line); box-shadow: 0 1px 3px rgba(0,0,0,.2);
+}
+.glass-scale { display: none; }
+
+/* ---------- 扁平按钮（无渐变、无阴影、无位移） ---------- */
+button {
+  border-radius: var(--r-sm);
+  padding: 7px 13px; font: inherit; font-weight: 600; font-size: 12px;
+  color: var(--ink); cursor: pointer; background: #fff;
+  transition: none;
+}
+button:hover:not(:disabled) { background: #F2F2F7; }
+button:active:not(:disabled) { background: #E5E5EA; }
+button:disabled { opacity: .45; cursor: not-allowed; }
+.btn-primary { background: var(--blue); color: #fff; border-color: var(--blue); }
+.btn-primary:hover:not(:disabled) { background: #0069D9; }
+.btn-ghost { background: #fff; color: var(--blue); border-color: #CFE4FF; }
+.btn-plain { background: #fff; color: var(--ink); }
+.btn-danger { background: #fff; color: var(--red); border-color: #FFD0CC; }
+
+.foot { padding: 10px 12px 18px; color: var(--muted); font-size: 11px; }
+.stat-line { font-size: 11.5px; color: var(--muted); padding: 6px 9px; }
+.stat-line.ok { color: #28A745; font-weight: 600; }

@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8">
+  <link rel="stylesheet" href="src/ui.css">
+  <link rel="stylesheet" href="popup.css">
+  <title>岗位自动投递助手 · 配置</title>
+</head>
+<body>
+  <div class="hero">
+    <h1>岗位自动投递助手 <span id="modeBadge" class="badge badge-dry">演练模式</span></h1>
+    <p>BOSS直聘 · 智联招聘 · 猎聘 · 前程无忧 · 鱼泡直聘 ｜ 真实 DOM 点击操作</p>
+  </div>
+
+  <div class="section">
+    <h2>运行模式</h2>
+    <div class="switch">
+      <input type="checkbox" id="dryRun" checked>
+      <label for="dryRun" style="cursor:pointer">
+        <b>演练模式（默认开启）</b>：勾选后只搜索、筛选、打开详情、识别按钮，<u>不点击最终投递按钮</u>，产出「预计投递清单」
+      </label>
+    </div>
+    <p class="hint" id="liveWarn" style="color:#dc2626">
+      当前默认<b>演练模式</b>：只搜索、筛选和识别页面按钮，不点击最终投递按钮。只有主动关闭演练模式后，才会进入真实投递确认流程。
+    </p>
+  </div>
+
+  <div class="section">
+    <h2>平台与每家上限</h2>
+    <div id="platforms"></div>
+    <p class="hint">这里的勾选用于控制台「本次执行 = 全部」的范围。<b>只想跑一家时，打开控制台在顶部「本次执行」直接选平台即可</b>：选中平台强制执行，其他平台不会进入计划，上限沿用这里设置的每家数值。上限是「本轮动作成功数」的软上限；平台日额度或风控提示优先，命中即停。</p>
+  </div>
+
+  <div class="section">
+    <h2>薪资口径（单位：K / 月）</h2>
+    <div class="row">
+      <label>薪资门槛 A ≥</label><input type="number" id="salaryMinK" min="0" max="300"> K
+      <label style="min-width:auto;margin-left:12px">薪资门槛 B ≥</label><input type="number" id="salaryFloorK" min="0" max="300"> K
+    </div>
+    <p class="hint">默认不限制最低薪资。设置门槛后，按薪资区间下限判定；两栏取较大值作为实际门槛，上限不参与判断。</p>
+  </div>
+
+  <div class="section">
+    <h2>搜索关键词</h2>
+    <textarea id="keywords" rows="4"></textarea>
+    <p class="hint">每行一个，或逗号分隔。每个关键词依次在 5 个平台搜索并翻页。</p>
+  </div>
+
+  <div class="section">
+    <h2>期望关键词（岗位名至少命中一个）</h2>
+    <textarea id="includeWords" rows="3"></textarea>
+  </div>
+
+  <div class="section">
+    <h2>屏蔽关键词（命中即跳过）</h2>
+    <textarea id="excludeWords" rows="4"></textarea>
+    <p class="hint">默认不预置屏蔽词，只作用于岗位标题，不扫描岗位描述，避免误杀。请按自己的需求填写。</p>
+  </div>
+
+  <div class="section">
+    <h2>城市与节奏</h2>
+    <div class="row">
+      <label>偏好城市</label><input type="text" id="cityPref">
+      <label class="chk"><input type="checkbox" id="strictCity"> 仅投该城市</label>
+    </div>
+    <div class="row">
+      <label>每家间隔</label><input type="number" id="gapMin"> ~ <input type="number" id="gapMax"> 秒
+    </div>
+    <div class="row">
+      <label>换词休息</label><input type="number" id="kwPauseMin"> ~ <input type="number" id="kwPauseMax"> 秒
+    </div>
+    <div class="row">
+      <label>每 <input type="number" id="longEvery" style="width:52px"> 家</label>
+      长休息 <input type="number" id="longMin"> ~ <input type="number" id="longMax"> 秒
+    </div>
+    <div class="row">
+      <label>连续失败</label><input type="number" id="maxFail"> 次即停
+      <label style="min-width:auto;margin-left:10px">每词页数</label><input type="number" id="maxPages">
+    </div>
+    <p class="hint">节奏默认按慢速随机间隔设置；招聘网站的页面结构和风控规则可能变化，请按平台规则合理使用。</p>
+  </div>
+
+  <div class="section">
+    <h2>操作</h2>
+    <div class="row">
+      <button id="save" class="btn-primary">保存配置</button>
+      <button id="openConsole" class="btn-ghost">打开控制台</button>
+      <button id="export" class="btn-plain">导出台账</button>
+    </div>
+    <div class="stat-line" id="status" style="margin-top:8px">读取中…</div>
+  </div>
+
+  <div class="foot">
+    命中验证码 / 滑块 / 账号异常 / 日额度提示会立即整任务停止，需本人手动处理；插件不提供任何绕过能力。
+  </div>
+
+  <script src="src/shared.js"></script>
+  <script src="popup.js"></script>
+</body>
+</html>
