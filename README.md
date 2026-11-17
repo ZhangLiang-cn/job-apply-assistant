@@ -2,10 +2,6 @@
 
 **AIBOT 研发与探索制作的浏览器扩展，支持 BOSS直聘、智联招聘、猎聘、前程无忧 51Job、鱼泡直聘。** 将多平台岗位扫描、条件筛选、页面操作、任务控制和执行台账集中到一个控制台。
 
-- 项目介绍页（启用 GitHub Pages 后访问）：https://zhangliang-cn.github.io/job-apply-assistant/
-- GitHub 源码：https://github.com/ZhangLiang-cn/job-apply-assistant
-- 完整 ZIP：https://github.com/ZhangLiang-cn/job-apply-assistant/archive/refs/heads/main.zip
-
 > **重要：** 演练模式不点击最终投递按钮；实投模式会触发招聘网站原生沟通或投递流程，可能向 HR 发送简历、招呼语并形成无法撤回的记录。使用前请本人确认运行模式、岗位和简历内容。
 
 ## 发布项目介绍页（首次设置一次）
@@ -113,7 +109,8 @@
 - **公文助手专业版：** 面向正式公文起草、改写与规范化处理。
 - **全球股票研究：** 面向全球市场、上市公司、行业线索与研究观点的结构化分析。
 
-社区账号：X 搜索 AIBOT｜研发与探索 @J4pFj。官方网站：https://www.sosoos.com、https://www.aibotcn.com、https://www.ailnc.com。
+社区账号：X 搜索 AIBOT｜研发与探索 @J4pFj。
+官方网站：https://www.sosoos.com、https://www.aibotcn.com、https://www.ailnc.com。
 
 ## 免责声明
 
